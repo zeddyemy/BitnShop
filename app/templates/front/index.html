@@ -1,0 +1,57 @@
+{% extends 'front/base/base.html' %}
+{% block title %}Home - {{ super() }}{% endblock %}
+
+{% block CSSandJS_Links %} {% endblock %}
+
+
+{% block content %}
+
+
+<!-- Main content -->
+<section id="main" class="p-5 min-h-svh sm:w-10/12 sm:ml-[calc(100%-theme(width.10/12))] flex flex-col gap-y-4">
+    <section class="sec">
+        <span
+            class="ballance-info text-white bg-gray-800 hover:bg-gray-900 focus:outline-none font-medium rounded-full text-base px-4 py-2.5 text-center inline-block border border-gray-600">
+            Balance: $7.23 </span>
+    </section>
+
+    <section class="sec">
+        <div id="order-info"
+            class="card text-white bg-gray-800 max-w-96 rounded-lg p-6  border border-gray-600">
+            <span id="order-num" class="block text-8xl font-semibold"> 0 </span>
+            <span id="order-name" class="block my-3"> Orders </span>
+            <span id="order-check"
+                class="btn inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-theme-clr hover:bg-theme-hvr-clr cursor-pointer">
+                Check Orders
+                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 5h12m0 0L9 1m4 4L9 9" />
+                </svg>
+            </span>
+        </div>
+    </section>
+
+    <section class="sec">
+        <div id="terms-c"
+            class="card bg-black/70 text-white hover:bg-black/75 rounded-lg p-6  border border-gray-600">
+            <h2 class="text-lg font-semibold"> T&Cs </h2>
+
+            <ol class="list-decimal list-inside">
+                <li class="w-full py-1"> By using this site, you agree to all the rules that are written here. </li>
+                <li class="w-full py-1"> We do not take any responsibility for any illegal actions. Use tools wisely. </li>
+                <li class="w-full py-1"> Bitcoin sent will be credited after 2 confirmations. </li>
+                <li class="w-full py-1"> All accounts older than 2 months will be deleted. </li>
+                <li class="w-full py-1"> We do not approve of reselling of tools and accounts. </li>
+                <li class="w-full py-1"> Do not hesitate to contact Support if you have any issues. </li>
+                <li class="w-full py-1"> Funds spent on site cannot be withdrawn to your wallet. </li>
+                <li class="w-full py-1"> Any attempts of fraud, abuse of the site and other actions that can somehow harm the work of the site or the
+                    administration will be punished by blocking the account without returning the account balance. </li>
+            </ol>
+            
+        </div>
+    </section>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %}{% endblock %}</title>
+        <link href="{{url_for('static',filename='dist/css/output.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{url_for('static', filename='dist/css/style.css')}}">
+
+        {% block CSSandJS_Links %}{% endblock %}
+        {% block styles_script %}{% endblock %}
+    </head>
+
+    <body class="" style="background: #edf2f7;">
+        {% include 'front/components/header.html' %}
+
+        <section id="wrapper" class="min-h-svh pt-16">
+            {% include 'front/components/sidebar.html' %}
+
+            {% block content %}{% endblock %}
+        </section>
+    </body>
+</html>

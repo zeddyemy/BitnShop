@@ -1,0 +1,6 @@
+**/__pycache__/
+.vscode/
+venv/
+migrations_local/
+migrations_live/
+node_modules/
