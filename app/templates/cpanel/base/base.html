@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %}{% endblock %}</title>
+        <link href="{{url_for('static',filename='dist/css/output.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{url_for('static', filename='cpanel/css/style.css')}}">
+        
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        {% block CSSandJS_Links %}{% endblock %}
+        {% block styles_script %}{% endblock %}
+    </head>
+
+    <body class="" style="background: #edf2f7;">
+        {% include 'cpanel/components/header.html' %}
+
+        <section id="wrapper" class="min-h-svh pt-16">
+            {% include 'cpanel/components/sidebar.html' %}
+
+            <!-- Main content -->
+            <section id="main" class="p-5 min-h-svh sm:w-10/12 sm:ml-[calc(100%-theme(width.10/12))] flex flex-col gap-y-4 bg-white dark:bg-gray-800">
+                {% include 'cpanel/components/alert_modal.html' %}
+                {% block content %}{% endblock %}
+            </section>
+        </section>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    </body>
+</html>

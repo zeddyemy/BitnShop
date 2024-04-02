@@ -71,6 +71,9 @@ def create_app(config_name=Config.ENV):
     from .core.routes.front import front_bp
     app.register_blueprint(front_bp)
     
+    from .core.routes.panel import panel_bp
+    app.register_blueprint(panel_bp)
+    
     with app.app_context():
         create_roles()  # Create roles for BitnShop
         create_nav_items(True)
