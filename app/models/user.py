@@ -13,11 +13,13 @@ Package: BitnShop
 from sqlalchemy.orm import backref
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 from ..extensions import db
 from ..models import Media
 from ..models.role import Role
 from ..config import Config
+
 
 class TempUser(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
@@ -35,7 +37,7 @@ class TempUser(db.Model):
         }
 
 # Define the User data model.
-class AppUser(db.Model):
+class AppUser(db.Model, UserMixin):
     __tablename__ = "app_user"
     
     id = db.Column(db.Integer(), primary_key=True)
@@ -43,7 +45,6 @@ class AppUser(db.Model):
     username = db.Column(db.String(50), nullable=True, unique=True)
     thePassword = db.Column(db.String(255), nullable=True)
     date_joined = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    two_fa_secret = db.Column(db.String(255), nullable=True)
 
     # Relationships
     profile = db.relationship('Profile', back_populates="app_user", uselist=False, cascade="all, delete-orphan")
@@ -117,19 +118,21 @@ class AppUser(db.Model):
                 'referral_link': self.profile.referral_link,
             })
         
+        '''
         user_wallet = self.wallet
         wallet_info = {
             'balance': user_wallet.balance if user_wallet else None,
             'currency_name': user_wallet.currency_name if user_wallet else None,
             'currency_code': user_wallet.currency_code if user_wallet else None,
         }
+        '''
         
         return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
             'date_joined': self.date_joined,
-            'wallet': wallet_info,
+            #'wallet': wallet_info,
             'roles': self.role_names,
             **address_info,  # Merge address information into the output dictionary
             **profile_data # Merge profile information into the output dictionary

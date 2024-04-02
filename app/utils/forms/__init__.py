@@ -6,8 +6,4 @@ License: MIT, see LICENSE for more details.
 Package: BitnShop
 """
 
-from flask import Blueprint, render_template
-
-front_bp: Blueprint = Blueprint('front', __name__, url_prefix='/')
-
-from . import home, auth
+from .auth import SignUpForm, LoginForm

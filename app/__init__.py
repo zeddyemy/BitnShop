@@ -12,15 +12,13 @@ Package: BitnShop
 """
 
 from flask import Flask, request
-from flask_moment import Moment
-from flask_migrate import Migrate
-from flask_cors import CORS
 
 
 from .models import *
-from .extensions import db
-#from .utils.middleware import set_access_control_allows, json_check, ping_url
+from .extensions import db, admin, migrate, cors, login_manager
+#from .utils.middleware import set_access_control_allows
 from .config import Config, configure_logging, config_by_name
+from .context_processors import my_context_Processor
 
 def create_app(config_name=Config.ENV):
     """
@@ -34,14 +32,30 @@ def create_app(config_name=Config.ENV):
     """
     app = Flask(__name__)
     app.config.from_object(config_by_name[config_name])
+    app.config.update(
+        SERVER_NAME='localhost:2001',
+        APPLICATION_ROOT='/',
+        PREFERRED_URL_SCHEME='http'
+    )
+    app.context_processor(my_context_Processor)
 
     # Initialize Flask extensions here
     db.init_app(app)
-    migrate = Migrate(app, db)
+    admin.init_app(app)
+    migrate.init_app(app)
+    cors.init_app(app) # Set up CORS. Allow '*' for origins.
     
-    # Set up CORS. Allow '*' for origins.
-    cors = CORS(app, resources={r"/*": {"origins": Config.CLIENT_ORIGINS}}, supports_credentials=True)
+    #Login Configuration
+    login_manager.init_app(app)
+    login_manager.login_view = 'front.login'
+    
+    @login_manager.user_loader
+    def load_user(user_id):
+        return AppUser.query.get(int(user_id))
 
+    
+    add_admin_views()
+    
     # Use the after_request decorator to set Access-Control-Allow
     #app.after_request(set_access_control_allows)
     
@@ -58,6 +72,7 @@ def create_app(config_name=Config.ENV):
     app.register_blueprint(front_bp)
     
     with app.app_context():
-        create_roles()  # Create roles for BitnShops
+        create_roles()  # Create roles for BitnShop
+        create_nav_items(True)
     
     return app

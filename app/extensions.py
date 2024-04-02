@@ -12,8 +12,17 @@ Package: BitnShop
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
+from flask_admin import Admin
+from flask_moment import Moment
+from flask_migrate import Migrate
+from flask_cors import CORS
+from flask_login import LoginManager
 
 from .config import Config
 
 db = SQLAlchemy()
 mail = Mail()
+migrate = Migrate(db=db)
+cors = CORS(resources={r"/*": {"origins": Config.CLIENT_ORIGINS}}, supports_credentials=True)
+admin = Admin(name='BitnShop Admin', template_mode='bootstrap4')  # Customize name and theme
+login_manager = LoginManager()

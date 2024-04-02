@@ -46,6 +46,46 @@
     backdrop-filter: blur(5px);
 }
 
-#main section {
+#main section,
+#main>div {
     position: relative;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+.card,
+.form-group input {
+    transition: var(--transition);
+}
+
+
+.alert-,
+.alert-error {
+    color: var(--alert-error);
+}
+.alert--solid,
+.alert-error-solid {
+    color: var(--alert-error-solid);
+}
+
+.alert-info {
+    color: var(--alert-info);
+}
+.alert-info-solid {
+    color: var(--alert-info-solid);
+}
+
+.alert-success {
+    color: var(--alert-success);
+}
+.alert-success-solid {
+    color: var(--alert-success-solid);
+}
+
+.alert-warning {
+    color: var(--alert-warning);
+}
+.alert-warning-solid {
+    color: var(--alert-warning-solid);
 }

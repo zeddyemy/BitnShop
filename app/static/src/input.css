@@ -27,4 +27,16 @@
     --preset-shadow-sharp: 6px 6px 0px #00000033;
 
     --brightness: brightness(100%) contrast(1);
+
+    --alert-info: #aed0ff;
+    --alert-info-solid: #aed0ff;
+    
+    --alert-error: #ffc2cc;
+    --alert-error-solid: #f87171;
+    
+    --alert-success: #a3d9a3;
+    --alert-success-solid: #4ade80;
+
+    --alert-warning: #fbf4a6;
+    --alert-warning-solid: #fde047;
 }
