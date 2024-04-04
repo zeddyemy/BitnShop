@@ -8,6 +8,6 @@ Package: BitnShop
 
 from flask import Blueprint, render_template
 
-panel_bp: Blueprint = Blueprint('cpanel', __name__, url_prefix='/cpanel')
+cpanel_bp: Blueprint = Blueprint('cpanel', __name__, url_prefix='/cpanel')
 
-from . import home, auth
+from . import home, auth, users, products

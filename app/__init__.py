@@ -15,10 +15,11 @@ from flask import Flask, request
 
 
 from .models import *
-from .extensions import db, admin, migrate, cors, login_manager
+from .extensions import ( db, admin, migrate, cors, login_manager )
 #from .utils.middleware import set_access_control_allows
 from .config import Config, configure_logging, config_by_name
 from .context_processors import my_context_Processor
+from .utils.helpers.role_helpers import create_roles_and_super_admin
 
 def create_app(config_name=Config.ENV):
     """
@@ -71,11 +72,11 @@ def create_app(config_name=Config.ENV):
     from .core.routes.front import front_bp
     app.register_blueprint(front_bp)
     
-    from .core.routes.panel import panel_bp
-    app.register_blueprint(panel_bp)
+    from .core.routes.cpanel import cpanel_bp
+    app.register_blueprint(cpanel_bp)
     
     with app.app_context():
-        create_roles()  # Create roles for BitnShop
+        create_roles_and_super_admin()  # Create roles for BitnShop
         create_nav_items(True)
     
     return app

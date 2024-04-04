@@ -6,5 +6,6 @@ License: MIT, see LICENSE for more details.
 Package: BitnShop
 """
 
-from .auth import SignUpForm, LoginForm
-from .cpanel import AdminAddUserForm
+from flask import request, render_template
+from flask_login import login_required
+from ....decorators import cpanel_login_required

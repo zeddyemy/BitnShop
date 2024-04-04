@@ -1,6 +1,4 @@
 from enum import Enum
-from slugify import slugify
-from sqlalchemy import inspect
 
 from ..extensions import db
 
@@ -9,9 +7,12 @@ class RoleNames(Enum):
     SUPER_ADMIN = 'Super Admin'
     Admin = 'Admin'
     JUNIOR_ADMIN = 'Junior Admin'
-    ADVERTISER = 'Advertiser'
-    EARNER = 'Earner'
+    MODERATOR = 'Moderator'
     CUSTOMER = 'Customer'
+    
+    @classmethod
+    def get_member_by_value(cls, value):
+        return next((member for name, member in cls.__members__.items() if member.value == value), None)
 
 # Association table for the many-to-many relationship
 user_roles = db.Table('user_roles',
@@ -25,24 +26,3 @@ class Role(db.Model):
     name = db.Column(db.Enum(RoleNames), unique=True, nullable=False)
     slug = db.Column(db.String(100), unique=True, nullable=False)
     description = db.Column(db.String(100), nullable=True)
-
-
-
-def create_roles(clear: bool = False) -> None:
-    """Creates default roles if the 'role' table doesn't exist.
-
-    Args:
-        clear (bool, optional): If True, clears all existing roles before creating new ones. Defaults to False.
-    """
-    if inspect(db.engine).has_table('role'):
-        if clear:
-            # Clear existing roles before creating new ones
-            Role.query.delete()
-            db.session.commit()
-        
-        for role_name in RoleNames:
-            if not Role.query.filter_by(name=role_name).first():
-                new_role = Role(name=role_name, slug=slugify(role_name.value))
-                db.session.add(new_role)
-        db.session.commit()
-    

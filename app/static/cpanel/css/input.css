@@ -28,15 +28,15 @@
 
     --brightness: brightness(100%) contrast(1);
 
-    --alert-info: #aed0ff;
-    --alert-info-solid: #aed0ff;
+    --alert-info: #99c4ff99;
+    --alert-info-solid: #134a97;
+    
+    --alert-danger: #ffc2cc99;
+    --alert-danger-solid: #af1e1e;
+    
+    --alert-success: #b9ffb999;
+    --alert-success-solid: #088636;
 
-    --alert-error: #ffc2cc;
-    --alert-error-solid: #f87171;
-
-    --alert-success: #a3d9a3;
-    --alert-success-solid: #4ade80;
-
-    --alert-warning: #fbf4a6;
-    --alert-warning-solid: #fde047;
+    --alert-warning: #fff69699;
+    --alert-warning-solid: #62540b;
 }

@@ -13,9 +13,8 @@ License: MIT, see LICENSE for more details.
 Package: BitnShop
 '''
 
-from ...extensions import db
-from ...models import AppUser, Address, Profile
-from .basic_helpers import generate_random_string
+from ...models import Profile, AppUser
+from .basic_helpers import console_log, generate_random_string
 
 
 def get_app_user_info(userId):
@@ -120,3 +119,4 @@ def referral_code_exists(code):
     if profile:
         return True
     return False
+

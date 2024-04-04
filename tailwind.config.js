@@ -16,8 +16,8 @@ module.exports = {
 				"alert-info": "var(--alert-info)",
 				"alert-info-solid": "var(--alert-info-solid)",
 				
-				"alert-error": "var(--alert-error)",
-				"alert-error-solid": "var(--alert-error-solid)",
+				"alert-danger": "var(--alert-danger)",
+				"alert-danger-solid": "var(--alert-danger-solid)",
 				
 				"alert-success": "var(--alert-success)",
 				"alert-success-solid": "var(--alert-success-solid)",

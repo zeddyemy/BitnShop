@@ -17,7 +17,6 @@ from flask_login import UserMixin
 
 from ..extensions import db
 from ..models import Media
-from ..models.role import Role
 from ..config import Config
 
 

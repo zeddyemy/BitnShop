@@ -11,7 +11,7 @@ Package: BitnShop
 """
 
 from .media import Media
-from .role import Role, RoleNames, create_roles
+from .role import Role, RoleNames, user_roles
 from .user import AppUser, Profile, Address, TempUser
 from .model_views import add_admin_views
 from .category import Category

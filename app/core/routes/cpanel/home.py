@@ -10,9 +10,9 @@ from flask import render_template
 from flask_login import login_required
 from ....decorators import cpanel_login_required
 
-from . import panel_bp
+from . import cpanel_bp
 
-@panel_bp.route("/", methods=['GET'])
+@cpanel_bp.route("/", methods=['GET'])
 @cpanel_login_required()
 def index():
     return render_template('cpanel/index.html')

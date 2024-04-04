@@ -8,8 +8,8 @@ from .extensions import db
 def my_context_Processor():
     if current_user.is_authenticated:
         current_user_obj = db.session.merge(current_user)
-        db.session.expunge_all() # detach all objects from the session
         user_id = current_user_obj.id
+        db.session.expunge_all() # detach all objects from the session
     else:
         user_id = None
     

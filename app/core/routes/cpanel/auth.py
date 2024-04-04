@@ -14,7 +14,7 @@ from sqlalchemy.exc import ( IntegrityError, DataError, DatabaseError, InvalidRe
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 
-from . import panel_bp
+from . import cpanel_bp
 from ....extensions import db
 from ....models import AppUser, Profile, Address, Role, RoleNames
 from ....utils.helpers import get_app_user, log_exception, console_log, redirect_url
@@ -22,7 +22,7 @@ from ....utils.forms import SignUpForm, LoginForm
 
 
 ## Route to sign up user
-@panel_bp.route("/signup", methods=['GET', 'POST'])
+@cpanel_bp.route("/signup", methods=['GET', 'POST'])
 def sign_up():
     error = False
     form = SignUpForm()
@@ -32,7 +32,7 @@ def sign_up():
     
     if request.method == 'POST':
         if form.validate_on_submit():
-            print('------ {0}'.format(request.form))
+            console_log('Form', request.form)
             try:
                 username = form.username.data
                 email = form.email.data
@@ -47,7 +47,7 @@ def sign_up():
                 new_user_profile = Profile(firstname=firstname, lastname=lastname, app_user=new_user)
                 new_user_address = Address(app_user=new_user)
             
-                role = Role.query.filter_by(name=RoleNames.CUSTOMER).first()
+                role = Role.query.filter_by(name=RoleNames.JUNIOR_ADMIN).first()
                 if role:
                     new_user.roles.append(role)
                     
@@ -67,7 +67,7 @@ def sign_up():
                 error = True
                 errMsg = e
                 db.session.rollback()
-                print(sys.exc_info())
+                log_exception('Database error occurred during registration', e)
             finally:
                 db.session.close()
             
@@ -95,7 +95,7 @@ def sign_up():
     return render_template('cpanel/auth/register.html', form=form, page='auth')
 
 ## Route to Login
-@panel_bp.route("/login", methods=['GET', 'POST'])
+@cpanel_bp.route("/login", methods=['GET', 'POST'])
 def login():
     error = False
     form = LoginForm()
@@ -137,7 +137,7 @@ def login():
     return render_template('cpanel/auth/login.html', form=form, page='auth')
 
 ## Route to Logout
-@panel_bp.route("/logout", methods=['GET', 'POST'])
+@cpanel_bp.route("/logout", methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
@@ -145,7 +145,7 @@ def logout():
     return redirect(url_for('cpanel.login'))
 
 ## route to add the admin user
-@panel_bp.route("/administrator", methods=['GET'])
+@cpanel_bp.route("/administrator", methods=['GET'])
 def admin():
     error = False
     try:

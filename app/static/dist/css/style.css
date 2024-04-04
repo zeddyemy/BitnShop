@@ -55,37 +55,31 @@
     margin-bottom: 20px;
 }
 .card,
-.form-group input {
+.form-group input,
+[class*="alert-"] {
     transition: var(--transition);
 }
 
-
-.alert-,
-.alert-error {
-    color: var(--alert-error);
+[class*="alert-"] {
+    backdrop-filter: blur(3px);
 }
-.alert--solid,
-.alert-error-solid {
-    color: var(--alert-error-solid);
+.alert-error,
+.alert-danger {
+    color: var(--alert-danger-solid);
+    background-color: var(--danger-error);
 }
 
 .alert-info {
-    color: var(--alert-info);
-}
-.alert-info-solid {
     color: var(--alert-info-solid);
+    background-color: var(--alert-info);
 }
 
 .alert-success {
-    color: var(--alert-success);
-}
-.alert-success-solid {
     color: var(--alert-success-solid);
+    background-color: var(--alert-success);
 }
 
 .alert-warning {
-    color: var(--alert-warning);
-}
-.alert-warning-solid {
     color: var(--alert-warning-solid);
+    background-color: var(--alert-warning);
 }
